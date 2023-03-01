@@ -18,13 +18,14 @@ a2()async{
   return aresp;
 }
 
-// an alternative syntax also returns tring properly
-a3()async{
+// an alternative syntax also returns string properly
+a3(arg_in)async{
   String ares = "a3init";
   print(ares);
+  print("a3 arg in ~ " + arg_in);
   return await Future.delayed(Duration(seconds:1), ()async{
-    ares = "a3call";
-    return ares;
+    arg_in = "a3_changed_arg";
+    return arg_in;
   });
 }
 
@@ -36,18 +37,18 @@ a4()async{
 
 
 void main()async{
-var a1res =  await a1();
+  var a1res =  await a1();
   print("a1 res ~ " + a1res);
 
   // returns string properly
-var a2res =  await a2();
-print("a2 res ~ " + a2res);
+  var a2res =  await a2();
+  print("a2 res ~ " + a2res);
 
-var a3res =  await a3();
-print("a3 res ~ " + a3res);
+  var a3res =  await a3(a2res);
+  print("a3 res ~ " + a3res);
 
-var a4res =  await a4();
-print("a4 res ~ " + a4res);
+  var a4res =  await a4();
+  print("a4 res ~ " + a4res);
 
 
 }
